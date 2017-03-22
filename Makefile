@@ -15,6 +15,4 @@ build:
 	docker build --tag=$(IMAGE_NAME) .
 
 run: build
-ifdef DOCUMENT_ROOT
-	docker run -p $(PORT):80 -v $(DOCUMENT_ROOT):/usr/share/nginx/html/ $(IMAGE_NAME)
-endif
+	docker run -p $(PORT):80 $(IMAGE_NAME)

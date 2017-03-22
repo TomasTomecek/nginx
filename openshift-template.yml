@@ -30,7 +30,7 @@ objects:
   metadata:
     name: nginx
   spec:
-    dockerImageRepository: koscicz/nginx
+    dockerImageRepository: modularitycontainers/nginx
     tags:
     - name: latest
 - kind: Route
@@ -69,13 +69,20 @@ objects:
       spec:
         containers:
         - name: nginx
-          image: nginx:latest
+          image: modularitycontainers/nginx:latest
           ports:
           - containerPort: 80
           volumeMounts:
           - name: data
             mountPath: "/usr/share/nginx/html"
+          volumeMounts:
+          - name: runtime-data
+            mountPath: "/var/lib/nginx"
+          imagePullPolicy: "Never"
         volumes:
         - name: data
+          emptyDir:
+            medium: ''
+        - name: runtime-data
           emptyDir:
             medium: ''
